@@ -5,11 +5,14 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import lombok.ToString;
 
 @Entity
 @Table(name="order_item")
 @Getter
 @Setter
+@ToString
+
 public class OrderItem {
 
 	@Id
@@ -26,11 +29,11 @@ public class OrderItem {
 	@Column(name="quantity")
 	private int quantity;
 
-	@Column(name="product_id")
-	private Long productId;
+	@Column(name="name")
+	private String name;
 
-	@Column(name = "product_size_id")
-	private Long productSizeId;
+	@Column(name = "size")
+	private String size;
 
 	@ManyToOne
 	@JoinColumn(name = "order_id")

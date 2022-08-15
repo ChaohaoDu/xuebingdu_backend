@@ -1,8 +1,16 @@
 package com.xuebingdu.frontend.config;
 
-;
+import com.xuebingdu.frontend.entity.Address;
+import com.xuebingdu.frontend.entity.Customer;
+import com.xuebingdu.frontend.entity.Order;
+import com.xuebingdu.frontend.entity.OrderItem;
 import com.xuebingdu.frontend.entity.Product;
 import com.xuebingdu.frontend.entity.ProductSize;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import javax.persistence.EntityManager;
+import javax.persistence.metamodel.EntityType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -11,53 +19,41 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
-import javax.persistence.EntityManager;
-import javax.persistence.metamodel.EntityType;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-
 @Configuration
-public class DataRestConfig implements RepositoryRestConfigurer {
+public class MyDataRestConfig implements RepositoryRestConfigurer {
+	private EntityManager entityManager;
+
 	@Value("${allowed.origins}")
 	private String[] allowedOrigins;
 
-	private EntityManager entityManager;
-
 	@Autowired
-	public DataRestConfig(EntityManager theEntityManager) {
-		entityManager = theEntityManager;
+	public MyDataRestConfig(EntityManager theEntityManger) {
+		entityManager = theEntityManger;
 	}
-
 
 	@Override
 	public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
+		HttpMethod[] theUnsupportedActions = {HttpMethod.PUT,  HttpMethod.DELETE, HttpMethod.PATCH};
 
-		HttpMethod[] theUnsupportedActions = {HttpMethod.PUT, HttpMethod.POST, HttpMethod.DELETE, HttpMethod.PATCH};
-
-		// disable HTTP methods for ProductCategory: PUT, POST, DELETE and PATCH
 		disableHttpMethods(Product.class, config, theUnsupportedActions);
 		disableHttpMethods(ProductSize.class, config, theUnsupportedActions);
+		disableHttpMethods(Order.class, config, theUnsupportedActions);
+		disableHttpMethods(OrderItem.class, config, theUnsupportedActions);
+		disableHttpMethods(Address.class, config, theUnsupportedActions);
+		disableHttpMethods(Customer.class, config, theUnsupportedActions);
 
-		// call an internal helper method
 		exposeIds(config);
-
-		// configure cors mapping
 		cors.addMapping(config.getBasePath() + "/**").allowedOrigins(allowedOrigins);
 	}
 
 	private void disableHttpMethods(Class theClass, RepositoryRestConfiguration config,
 	   HttpMethod[] theUnsupportedActions) {
 		config.getExposureConfiguration().forDomainType(theClass)
-		   .withItemExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions))
-		   .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions));
+		   .withItemExposure((metadata, httpMethods) -> httpMethods.disable(theUnsupportedActions))
+		   .withCollectionExposure((metadata, httpMethods) -> httpMethods.disable(theUnsupportedActions));
 	}
 
 	private void exposeIds(RepositoryRestConfiguration config) {
-
-		// expose entity ids
-
 		// - get a list of all entity classes from the entity manager
 		Set<EntityType<?>> entities = entityManager.getMetamodel().getEntities();
 
@@ -70,7 +66,9 @@ public class DataRestConfig implements RepositoryRestConfigurer {
 		}
 
 		// - expose the entity ids for the array of entity/domain types
-		Class[] domainTypes = entityClasses.toArray(new Class[0]);
+		Class[] domainTypes = entityClasses.toArray(new Class[1]);
+
 		config.exposeIdsFor(domainTypes);
 	}
 }
+

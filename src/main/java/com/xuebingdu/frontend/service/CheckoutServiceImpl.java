@@ -3,6 +3,7 @@ package com.xuebingdu.frontend.service;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
+import com.xuebingdu.frontend.entity.Address;
 import com.xuebingdu.frontend.entity.Customer;
 import com.xuebingdu.frontend.entity.Order;
 import com.xuebingdu.frontend.entity.OrderItem;
@@ -30,7 +31,7 @@ public class CheckoutServiceImpl implements CheckoutService {
 	@Override
 	@Transactional
 	public PurchaseResponse placeOrder(Purchase purchase) {
-
+		System.out.println(purchase);
 		// retrieve the order info from dto
 		Order order = purchase.getOrder();
 
@@ -43,8 +44,7 @@ public class CheckoutServiceImpl implements CheckoutService {
 		orderItems.forEach(item -> order.add(item));
 
 		// populate order with billingAddress and shippingAddress
-		order.setBillingAddress(purchase.getBillingAddress());
-		order.setShippingAddress(purchase.getShippingAddress());
+		order.setAddress(purchase.getAddress());
 
 		// populate customer with order
 		Customer customer = purchase.getCustomer();
@@ -61,6 +61,8 @@ public class CheckoutServiceImpl implements CheckoutService {
 
 		customer.add(order);
 
+		Address address = purchase.getAddress();
+		address.add(order);
 		// save to the database
 		customerRepository.save(customer);
 

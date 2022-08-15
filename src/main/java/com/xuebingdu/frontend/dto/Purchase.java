@@ -12,8 +12,7 @@ import java.util.Set;
 public class Purchase {
 
 	private Customer customer;
-	private Address shippingAddress;
-	private Address billingAddress;
+	private Address address;
 	private Order order;
 	private Set<OrderItem> orderItems;
 

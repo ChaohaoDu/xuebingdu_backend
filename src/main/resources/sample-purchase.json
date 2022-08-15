@@ -1,0 +1,37 @@
+{
+  "customer": {
+    "firstName": "afasa",
+    "lastName": "afasa",
+    "email": "afasa@test.com"
+  },
+  "address": {
+    "street1": "fsfsf",
+    "street2": "",
+    "city": "sfdsf",
+    "state": "Acre",
+    "country": "Brazil",
+    "zipCode": "19111"
+  },
+  "order": {
+    "productTotalPrice": 36.98,
+    "totalQuantity": 2,
+    "shipping": 10
+  },
+  "orderItems": [
+    {
+      "imageUrl": "https://res.cloudinary.com/chaohaodu/image/upload/v1659910561/xuebingdu/_XDU2000_3_jgpouv.jpg",
+      "quantity": 1,
+      "unitPrice": 18.99,
+      "size": "3x3",
+      "name": "Name1"
+    },
+    {
+      "imageUrl": "https://res.cloudinary.com/chaohaodu/image/upload/v1659910562/xuebingdu/_XDU9644_a_ahlnou.jpg",
+      "quantity": 1,
+      "unitPrice": 17.99,
+      "productId": 51,
+      "size": "6x6",
+      "name": "Name2"
+    }
+  ]
+}

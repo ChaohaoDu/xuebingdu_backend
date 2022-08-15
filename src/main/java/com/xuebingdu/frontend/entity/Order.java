@@ -27,8 +27,11 @@ public class Order {
 	@Column(name = "total_quantity")
 	private int totalQuantity;
 
-	@Column(name = "total_price")
-	private BigDecimal totalPrice;
+	@Column(name = "product_total_price")
+	private BigDecimal productTotalPrice;
+
+	@Column(name = "shipping")
+	private BigDecimal shipping;
 
 	@Column(name = "status")
 	private String status;
@@ -49,15 +52,10 @@ public class Order {
 	private Customer customer;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "shipping_address_id", referencedColumnName = "id")
-	private Address shippingAddress;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "billing_address_id", referencedColumnName = "id")
-	private Address billingAddress;
+	@JoinColumn(name = "address_id")
+	private Address address;
 
 	public void add(OrderItem item) {
-
 		if (item != null) {
 			if (orderItems == null) {
 				orderItems = new HashSet<>();
@@ -66,6 +64,14 @@ public class Order {
 			orderItems.add(item);
 			item.setOrder(this);
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "Order{" + "id=" + id + ", orderTrackingNumber='" + orderTrackingNumber + '\'' + ", totalQuantity="
+		   + totalQuantity + ", productTotalPrice=" + productTotalPrice + ", shipping=" + shipping + ", status='"
+		   + status + '\'' + ", dateCreated=" + dateCreated + ", lastUpdated=" + lastUpdated + ", orderItems="
+		   + orderItems + ", customer=" + customer + ", address=" + address + '}';
 	}
 }
 

@@ -6,11 +6,13 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+import lombok.ToString;
 
 @Entity
 @Table(name = "customer")
 @Getter
 @Setter
+@ToString
 public class Customer {
 
 	@Id

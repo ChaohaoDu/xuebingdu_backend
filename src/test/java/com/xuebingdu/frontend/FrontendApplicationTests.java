@@ -10,13 +10,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class FrontendApplicationTests {
 
-	@Test
-	void contextLoads() {
-		Optional<Product> byId = pr.findById(1L);
-		System.out.println(byId);
-	}
-
-	@Autowired
-	private ProductRepository pr;
 
 }
