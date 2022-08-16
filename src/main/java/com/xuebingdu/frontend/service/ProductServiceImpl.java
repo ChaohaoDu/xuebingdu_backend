@@ -28,7 +28,7 @@ public class ProductServiceImpl implements ProductService {
 
 		for (ProductSize productSize : newProduct.getProductSize()) {
 			productSize.setProductId(nextProductId);
-			productSize.setActive(Boolean.TRUE);
+			productSize.setActive(true);
 			productSize.setDateCreated(new Date());
 			productSize.setLastUpdated(new Date());
 			productSizeRepository.save(productSize);

@@ -20,7 +20,7 @@ import java.util.*;
 @Service
 public class CheckoutServiceImpl implements CheckoutService {
 
-	private CustomerRepository customerRepository;
+	private final CustomerRepository customerRepository;
 
 	public CheckoutServiceImpl(CustomerRepository customerRepository, @Value("${stripe.key.secret}") String secretKey) {
 		this.customerRepository = customerRepository;
@@ -34,7 +34,7 @@ public class CheckoutServiceImpl implements CheckoutService {
 		System.out.println(purchase);
 		// retrieve the order info from dto
 		Order order = purchase.getOrder();
-
+		order.setStatus("prepare");
 		// generate tracking number
 		String orderTrackingNumber = UUID.randomUUID().toString();
 		order.setOrderTrackingNumber(orderTrackingNumber);
