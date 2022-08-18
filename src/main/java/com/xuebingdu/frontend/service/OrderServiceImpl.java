@@ -15,7 +15,6 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public String updateState(Order order) {
-		System.out.println("reachieved");
 		Order orderToUpdate = orderRepository.getById(order.getId());
 		orderToUpdate.setStatus(order.getStatus());
 		orderToUpdate.setLastUpdated(new Date());

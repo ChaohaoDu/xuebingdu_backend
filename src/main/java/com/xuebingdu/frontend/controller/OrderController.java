@@ -20,7 +20,6 @@ public class OrderController {
 
 	@PostMapping("/update-state")
 	public ResponseEntity<String> updateState(@RequestBody Order order) {
-		System.out.println("received updateState");
 		orderService.updateState(order);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
