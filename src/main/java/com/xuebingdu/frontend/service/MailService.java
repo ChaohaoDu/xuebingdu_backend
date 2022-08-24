@@ -23,4 +23,5 @@ public interface MailService {
 	 */
 	boolean sendWithWithEnclosure(String to, String subject, String content, String[] filePaths);
 
+	boolean sendToMyselfWithHtml(String to, String content);
 }

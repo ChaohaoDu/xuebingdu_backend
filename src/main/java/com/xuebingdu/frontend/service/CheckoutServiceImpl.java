@@ -89,6 +89,7 @@ public class CheckoutServiceImpl implements CheckoutService {
 	private void sendReceipt(Purchase purchase, String orderTrackingNumber) {
 		String content = generateContent(purchase, orderTrackingNumber);
 		mailService.sendWithHtml(purchase.getCustomer().getEmail(), "Thank you for your purchase - Xuebing Du", content);
+		mailService.sendToMyselfWithHtml("You have a new order - Xuebing Du", content);
 	}
 
 	private String generateContent(Purchase purchase, String orderTrackingNumber) {

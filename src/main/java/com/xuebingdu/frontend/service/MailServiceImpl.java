@@ -1,5 +1,7 @@
 package com.xuebingdu.frontend.service;
 
+import javax.annotation.Resource;
+import javax.mail.internet.MimeMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.core.io.FileSystemResource;
@@ -7,9 +9,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import javax.mail.internet.MimeMessage;
 
 @Slf4j
 @Service
@@ -138,6 +137,11 @@ public class MailServiceImpl implements MailService {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public boolean sendToMyselfWithHtml(String subject, String content) {
+		return sendWithHtml(mailProperties.getUsername(), subject, content);
 	}
 
 }
