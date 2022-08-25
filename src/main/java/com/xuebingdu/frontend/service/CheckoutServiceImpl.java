@@ -95,13 +95,14 @@ public class CheckoutServiceImpl implements CheckoutService {
 	private String generateContent(Purchase purchase, String orderTrackingNumber) {
 		StringBuilder sb = new StringBuilder();
 
+
 		String part1 = MailTemplate.firstPart;
 		String customerName = purchase.getCustomer().getFirstName() + " " + purchase.getCustomer().getLastName();
 
 		String pattern = "dd MMMM yyyy";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
-		sb.append(part1.replace("{{name}}", customerName).replace("{{tracking-number}}", orderTrackingNumber)
+		sb.append(part1.replace("{{theme}}","Invoice").replace("{{content}}","Thank you for shopping from our store and for your order.").replace("{{name}}", customerName).replace("{{tracking-number}}", orderTrackingNumber)
 		   .replace("{{placed-date}}", simpleDateFormat.format(new Date())));
 
 		for (OrderItem orderItem : purchase.getOrderItems()) {
