@@ -96,7 +96,7 @@ public class MailTemplate {
 	   + "                <th style=\"font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 10px 7px 0;\"\n"
 	   + "                    width=\"52%\" align=\"left\">\n" + "                  Item\n" + "                </th>\n"
 	   + "                <th style=\"font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;\"\n"
-	   + "                    align=\"left\">\n" + "                  <small>SKU</small>\n" + "                </th>\n"
+	   + "                    align=\"left\">\n" + "                  <small>size</small>\n" + "                </th>\n"
 	   + "                <th style=\"font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;\"\n"
 	   + "                    align=\"center\">\n" + "                  Quantity\n" + "                </th>\n"
 	   + "                <th style=\"font-size: 12px; font-family: 'Open Sans', sans-serif; color: #1e2b33; font-weight: normal; line-height: 1; vertical-align: top; padding: 0 0 7px;\"\n"
